@@ -32,18 +32,24 @@ class RegisterController extends GetxController {
     String url = baseUrl + "register";
     Map<String, String> data = {'email': email, "password": pass};
     try {
-      final response =
-          await http.post(Uri.parse(url), headers: headers, body: data, encoding: convert.Encoding.getByName("utf-8"),);
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: data,
+        encoding: convert.Encoding.getByName("utf-8"),
+      );
 
       print(response.body);
       if (response.statusCode == 400) {
-        Get.snackbar("Failed", response.body);
+        Get.snackbar("Failed", response.body,
+            backgroundColor: Colors.red, colorText: Colors.white);
       } else {
         Get.snackbar("Success", "Sukses Register \n Email : ${data['email']}",
             backgroundColor: Colors.green, colorText: Colors.white);
       }
     } catch (e) {
-      Get.snackbar("Failed", e.toString());
+      Get.snackbar("Failed", e.toString(),
+          backgroundColor: Colors.red, colorText: Colors.white);
     }
   }
 }
